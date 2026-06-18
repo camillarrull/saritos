@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-papel: #FFFFFF;
+  --color-arena: #D6E4F0;
+  --color-cacao: #1A3A5C;
+  --color-carao: #2E6DA4;
+  --color-flor: #A0BFDA;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: #FFFFFF;
+  color: #1A3A5C;
+  font-family: 'Jost', sans-serif;
+  margin: 0;
+}
