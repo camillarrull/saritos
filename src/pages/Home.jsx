@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import Banner from '../components/Banner'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import NewArrivalsSection from '../components/NewArrivalsSection'
@@ -11,7 +12,6 @@ export default function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState('todas')
-  const [activeSub, setActiveSub] = useState(null)
 
   useEffect(() => {
     async function fetchProducts() {
@@ -26,16 +26,23 @@ export default function Home() {
     fetchProducts()
   }, [])
 
-  const filtered = products
-    .filter(p => activeCategory === 'todas' || p.category === activeCategory)
-    .filter(p => activeCategory !== 'aros' || !activeSub || p.subcategory === activeSub)
+  const featuredProduct = products.find(p => p.featured) || null
+
+  const filtered = products.filter(p => {
+    if (activeCategory === 'todas') return true
+    if (activeCategory === 'lo nuevo') return p.is_new
+    return p.category === activeCategory
+  })
 
   return (
     <div className="min-h-screen bg-papel">
-      <Header />
-      <Hero />
+      <Banner />
+      <Header activeCategory={activeCategory} onCategory={setActiveCategory} />
+      <Hero featuredProduct={featuredProduct} />
 
-      <NewArrivalsSection products={products} />
+      <section id="novedades">
+        <NewArrivalsSection products={products} />
+      </section>
 
       <div style={{ borderTop: '1px solid #A0BFDA', margin: '0 auto', maxWidth: '4rem' }} />
 
@@ -52,12 +59,7 @@ export default function Home() {
             <img src="/flor_azul.svg" alt="" className="h-8 w-8 object-contain opacity-50" />
           </div>
 
-          <FilterPills
-            active={activeCategory}
-            activeSub={activeSub}
-            onChange={cat => { setActiveCategory(cat); setActiveSub(null) }}
-            onChangeSub={setActiveSub}
-          />
+          <FilterPills active={activeCategory} onChange={setActiveCategory} />
 
           {loading ? (
             <div className="text-center py-20 text-carao font-jost font-light">cargando...</div>

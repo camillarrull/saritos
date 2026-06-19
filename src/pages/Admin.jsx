@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 
-const EMPTY_FORM = { name: '', description: '', price: '', category: '', subcategory: '', is_new: false }
-const CATEGORIES = ['aros', 'collares', 'bolsos', 'accesorios']
+const EMPTY_FORM = { name: '', description: '', price: '', category: '', subcategory: '', is_new: false, featured: false }
+const CATEGORIES = ['aros', 'collares', 'accesorios']
 const AROS_SUB = ['todos los días', 'fiesta']
 
 export default function Admin() {
@@ -58,6 +58,7 @@ export default function Admin() {
         category: form.category,
         subcategory: form.category === 'aros' ? form.subcategory : null,
         is_new: form.is_new,
+        featured: form.featured,
         image_url: imageUrl,
       }
       if (editingId) {
@@ -86,6 +87,7 @@ export default function Admin() {
       category: product.category || '',
       subcategory: product.subcategory || '',
       is_new: product.is_new,
+      featured: product.featured || false,
     })
     setImageFile(null)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -104,6 +106,14 @@ export default function Admin() {
 
   async function toggleNew(product) {
     await supabase.from('products').update({ is_new: !product.is_new }).eq('id', product.id)
+    fetchProducts()
+  }
+
+  async function toggleFeatured(product) {
+    if (!product.featured) {
+      await supabase.from('products').update({ featured: false }).neq('id', '00000000-0000-0000-0000-000000000000')
+    }
+    await supabase.from('products').update({ featured: !product.featured }).eq('id', product.id)
     fetchProducts()
   }
 
@@ -167,6 +177,10 @@ export default function Admin() {
               <input type="checkbox" id="is_new" checked={form.is_new} onChange={e => setForm({ ...form, is_new: e.target.checked })} />
               <label htmlFor="is_new" className="text-sm">Marcar como "nuevo"</label>
             </div>
+            <div className="flex items-center gap-2">
+              <input type="checkbox" id="featured" checked={form.featured} onChange={e => setForm({ ...form, featured: e.target.checked })} />
+              <label htmlFor="featured" className="text-sm">Producto destacado (hero)</label>
+            </div>
             <div className="md:col-span-2 flex gap-3">
               <button type="submit" disabled={loading} className="bg-cacao text-papel px-6 py-2 rounded text-sm hover:opacity-90 disabled:opacity-50">
                 {loading ? 'Guardando...' : editingId ? 'Guardar cambios' : 'Agregar producto'}
@@ -202,6 +216,9 @@ export default function Admin() {
                     </button>
                     <button onClick={() => toggleNew(p)} className={`text-xs px-2 py-1 rounded ${p.is_new ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-400'}`}>
                       {p.is_new ? 'nuevo' : 'normal'}
+                    </button>
+                    <button onClick={() => toggleFeatured(p)} className={`text-xs px-2 py-1 rounded ${p.featured ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-400'}`}>
+                      {p.featured ? '★ destacado' : 'destacar'}
                     </button>
                     <button onClick={() => startEdit(p)} className="text-xs px-2 py-1 rounded border border-gray-200 hover:bg-gray-50">editar</button>
                     <button onClick={() => deleteProduct(p.id)} className="text-xs px-2 py-1 rounded bg-red-50 text-red-500 hover:bg-red-100">eliminar</button>
