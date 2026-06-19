@@ -6,9 +6,9 @@ export default function Hero({ featuredProduct }) {
   return (
     <section style={{
       backgroundColor: '#F8F6F3',
-      height: '70vh',
+      minHeight: '60vh',
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
       overflow: 'hidden',
     }}>
       {/* izquierda: tagline fija siempre */}
