@@ -7,7 +7,7 @@ export default function Banner() {
       color: '#FFFFFF',
       textAlign: 'center',
       padding: '0.55rem 1rem',
-      fontSize: '0.72rem',
+      fontSize: 'clamp(0.6rem, 1.5vw, 0.72rem)',
       letterSpacing: '0.08em',
       fontFamily: 'Jost',
       fontWeight: 300,

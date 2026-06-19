@@ -13,7 +13,7 @@ export default function Hero({ featuredProduct }) {
       backgroundColor: '#F5F7FA',
       minHeight: '88vh',
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
       overflow: 'hidden',
     }}>
       {/* texto izquierda */}
@@ -21,7 +21,7 @@ export default function Hero({ featuredProduct }) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: '5rem 4rem 5rem 6rem',
+        padding: 'clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 6rem)',
         gap: '1.4rem',
       }}>
         {featuredProduct && (
@@ -40,7 +40,7 @@ export default function Hero({ featuredProduct }) {
         <h1 style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 300,
-          fontSize: '3.8rem',
+          fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
           color: '#1A3A5C',
           margin: 0,
           lineHeight: 1.08,
