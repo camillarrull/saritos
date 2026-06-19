@@ -16,7 +16,9 @@ function App() {
   function addToCart(product) {
     setCartItems(prev => {
       const existing = prev.find(i => i.id === product.id)
+      const stock = product.stock ?? 999
       if (existing) {
+        if (existing.qty >= stock) return prev
         return prev.map(i => i.id === product.id ? { ...i, qty: i.qty + 1 } : i)
       }
       return [...prev, { ...product, qty: 1 }]
@@ -30,7 +32,12 @@ function App() {
 
   function updateQty(id, delta) {
     setCartItems(prev =>
-      prev.map(i => i.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i)
+      prev.map(i => {
+        if (i.id !== id) return i
+        const stock = i.stock ?? 999
+        const newQty = Math.min(stock, Math.max(1, i.qty + delta))
+        return { ...i, qty: newQty }
+      })
     )
   }
 

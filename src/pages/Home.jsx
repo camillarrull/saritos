@@ -44,8 +44,6 @@ export default function Home() {
         <NewArrivalsSection products={products} />
       </section>
 
-      <div style={{ borderTop: '1px solid #A0BFDA', margin: '0 auto', maxWidth: '4rem' }} />
-
       <section id="catalogo" className="bg-papel py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-6 mb-12">

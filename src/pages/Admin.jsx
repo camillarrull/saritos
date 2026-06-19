@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 
-const EMPTY_FORM = { name: '', description: '', price: '', category: '', subcategory: '', is_new: false, featured: false }
+const EMPTY_FORM = { name: '', description: '', price: '', stock: '', category: '', subcategory: '', is_new: false, featured: false }
 const CATEGORIES = ['aros', 'collares', 'accesorios']
 const AROS_SUB = ['todos los días', 'fiesta']
 
@@ -57,6 +57,7 @@ export default function Admin() {
         price: parseFloat(form.price),
         category: form.category,
         subcategory: form.category === 'aros' ? form.subcategory : null,
+        stock: form.stock !== '' ? parseInt(form.stock) : null,
         is_new: form.is_new,
         featured: form.featured,
         image_url: imageUrl,
@@ -86,6 +87,7 @@ export default function Admin() {
       price: product.price,
       category: product.category || '',
       subcategory: product.subcategory || '',
+      stock: product.stock ?? '',
       is_new: product.is_new,
       featured: product.featured || false,
     })
@@ -158,6 +160,7 @@ export default function Admin() {
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input required placeholder="Nombre *" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className="border border-gray-200 px-3 py-2 rounded text-sm" />
             <input required placeholder="Precio *" type="number" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} className="border border-gray-200 px-3 py-2 rounded text-sm" />
+            <input placeholder="Stock (unidades)" type="number" min="0" value={form.stock} onChange={e => setForm({ ...form, stock: e.target.value })} className="border border-gray-200 px-3 py-2 rounded text-sm" />
             <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value, subcategory: '' })} className="border border-gray-200 px-3 py-2 rounded text-sm text-gray-500">
               <option value="">Sin categoría</option>
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
@@ -208,7 +211,7 @@ export default function Admin() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-sm truncate">{p.name}</p>
-                    <p className="text-xs text-gray-400">{p.category || 'sin categoría'} · ${p.price}</p>
+                    <p className="text-xs text-gray-400">{p.category || 'sin categoría'} · ${p.price} · stock: {p.stock ?? '—'}</p>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <button onClick={() => toggleActive(p)} className={`text-xs px-2 py-1 rounded ${p.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-400'}`}>

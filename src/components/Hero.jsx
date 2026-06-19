@@ -5,39 +5,83 @@ export default function Hero({ featuredProduct }) {
     document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  if (featuredProduct) {
-    return (
-      <section style={{
-        position: 'relative',
-        backgroundColor: '#F5F7FA',
-        minHeight: '88vh',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        overflow: 'hidden',
+  const title = featuredProduct ? featuredProduct.name : null
+  const imageUrl = featuredProduct?.image_url || null
+
+  return (
+    <section style={{
+      backgroundColor: '#F5F7FA',
+      minHeight: '88vh',
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      overflow: 'hidden',
+    }}>
+      {/* texto izquierda */}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '5rem 4rem 5rem 6rem',
+        gap: '1.4rem',
       }}>
-        {/* texto izquierda */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          padding: '4rem 3rem 4rem 5rem',
-          gap: '1.2rem',
-        }}>
-          <span style={{ fontFamily: 'Jost', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#2E6DA4', fontWeight: 300 }}>
+        {featuredProduct && (
+          <span style={{
+            fontFamily: 'Jost',
+            fontSize: '0.68rem',
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color: '#2E6DA4',
+            fontWeight: 300,
+          }}>
             destacado
           </span>
-          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, fontSize: '3.2rem', color: '#1A3A5C', margin: 0, lineHeight: 1.1 }}>
-            {featuredProduct.name}
-          </h1>
-          {featuredProduct.description && (
-            <p style={{ fontFamily: 'Jost', fontWeight: 300, fontSize: '0.9rem', color: '#5A7FA0', margin: 0, lineHeight: 1.6, maxWidth: '28ch' }}>
-              {featuredProduct.description}
-            </p>
+        )}
+
+        <h1 style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontWeight: 300,
+          fontSize: '3.8rem',
+          color: '#1A3A5C',
+          margin: 0,
+          lineHeight: 1.08,
+        }}>
+          {title ? (
+            title
+          ) : (
+            <>el detalle que{' '}
+              <span style={{ fontStyle: 'italic', color: '#2E6DA4' }}>lo cambia</span>
+              {' '}todo</>
           )}
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.8rem', color: '#1A3A5C', margin: 0, fontWeight: 400 }}>
+        </h1>
+
+        {featuredProduct?.description && (
+          <p style={{
+            fontFamily: 'Jost',
+            fontWeight: 300,
+            fontSize: '0.88rem',
+            color: '#5A7FA0',
+            margin: 0,
+            lineHeight: 1.7,
+            maxWidth: '30ch',
+          }}>
+            {featuredProduct.description}
+          </p>
+        )}
+
+        {featuredProduct && (
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: '2rem',
+            color: '#1A3A5C',
+            margin: 0,
+            fontWeight: 400,
+          }}>
             ${featuredProduct.price?.toLocaleString('es-AR')}
           </p>
-          <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
+        )}
+
+        <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', marginTop: '0.4rem' }}>
+          {featuredProduct ? (
             <a
               href={`https://wa.me/${WA}?text=Hola! Me interesa ${encodeURIComponent(featuredProduct.name)}`}
               target="_blank"
@@ -46,64 +90,66 @@ export default function Hero({ featuredProduct }) {
                 display: 'inline-block',
                 backgroundColor: '#1A3A5C',
                 color: '#FFFFFF',
-                padding: '0.7rem 2rem',
+                padding: '0.75rem 2.2rem',
                 fontFamily: 'Jost',
-                fontSize: '0.75rem',
-                letterSpacing: '0.15em',
+                fontSize: '0.72rem',
+                letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 textDecoration: 'none',
               }}
             >
               consultar
             </a>
-            <button
-              onClick={scrollToCatalog}
-              style={{
-                border: '1px solid #1A3A5C',
-                color: '#1A3A5C',
-                padding: '0.7rem 2rem',
-                fontFamily: 'Jost',
-                fontSize: '0.75rem',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                background: 'transparent',
-                cursor: 'pointer',
-              }}
-            >
-              ver todo
-            </button>
-          </div>
+          ) : null}
+          <button
+            onClick={scrollToCatalog}
+            style={{
+              border: '1px solid #1A3A5C',
+              color: '#1A3A5C',
+              padding: '0.75rem 2.2rem',
+              fontFamily: 'Jost',
+              fontSize: '0.72rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              background: 'transparent',
+              cursor: 'pointer',
+            }}
+          >
+            ver colección
+          </button>
         </div>
-
-        {/* foto derecha */}
-        <div style={{ position: 'relative', overflow: 'hidden' }}>
-          <img
-            src={featuredProduct.image_url}
-            alt={featuredProduct.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #F5F7FA 0%, transparent 8%)' }} />
-        </div>
-      </section>
-    )
-  }
-
-  return (
-    <section style={{ position: 'relative', backgroundColor: '#F5F7FA', height: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 2rem', overflow: 'hidden', gap: '1rem' }}>
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <img src="/flor_azul.svg" alt="" style={{ position: 'absolute', width: '420px', opacity: '0.06', pointerEvents: 'none', top: '50%', left: '50%', transform: 'translate(-52%, -55%)' }} />
-        <img src="/logo_azul.svg" alt="SARITOS" style={{ width: '700px', maxWidth: '90vw', position: 'relative', zIndex: 1 }} />
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem' }}>
-        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, fontSize: '1.65rem', color: '#2E6DA4', margin: 0 }}>
-          el detalle que lo cambia todo
-        </p>
-        <button
-          onClick={scrollToCatalog}
-          style={{ border: '1px solid #1A3A5C', color: '#1A3A5C', padding: '0.65rem 2rem', fontSize: '0.78rem', letterSpacing: '0.15em', fontFamily: 'Jost', textTransform: 'uppercase', background: 'transparent', cursor: 'pointer' }}
-        >
-          ver colección
-        </button>
+
+      {/* imagen derecha */}
+      <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#EBF0F5' }}>
+        {imageUrl ? (
+          <>
+            <img
+              src={imageUrl}
+              alt={featuredProduct?.name || ''}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+            />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #F5F7FA 0%, transparent 6%)' }} />
+          </>
+        ) : (
+          <div style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '1rem',
+            color: '#A0BFDA',
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '3rem', height: '3rem' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <p style={{ fontFamily: 'Jost', fontSize: '0.75rem', letterSpacing: '0.1em', textAlign: 'center', maxWidth: '16ch' }}>
+              marcá un producto como destacado desde el admin
+            </p>
+          </div>
+        )}
       </div>
     </section>
   )
