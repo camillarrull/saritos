@@ -49,7 +49,7 @@ export default function ProductCard({ product, showNewBadge = false }) {
         </p>
         {pocaStock && (
           <p style={{ fontFamily: 'Jost', fontSize: '0.7rem', color: '#C08B3A', fontWeight: 300, letterSpacing: '0.05em' }}>
-            últimas {stock} unidades
+            {stock === 1 ? 'última unidad' : `últimas ${stock} unidades`}
           </p>
         )}
         <button

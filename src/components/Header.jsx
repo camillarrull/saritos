@@ -18,7 +18,7 @@ export default function Header({ activeCategory, onCategory }) {
   }
 
   return (
-    <header style={{ borderBottom: '1px solid #A0BFDA', backgroundColor: '#FFFFFF', position: 'sticky', top: 0, zIndex: 40 }}>
+    <header style={{ borderBottom: '1px solid #A0BFDA', backgroundColor: '#F8F6F3', position: 'sticky', top: 0, zIndex: 40 }}>
       <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', minHeight: '56px' }}>
 
         {/* izquierda: nav desktop / hamburger mobile */}
@@ -64,7 +64,7 @@ export default function Header({ activeCategory, onCategory }) {
 
       {/* menú mobile desplegable */}
       {menuOpen && (
-        <div className="md:hidden" style={{ borderTop: '1px solid #A0BFDA', backgroundColor: '#FFFFFF' }}>
+        <div className="md:hidden" style={{ borderTop: '1px solid #A0BFDA', backgroundColor: '#F8F6F3' }}>
           {NAV.map(cat => (
             <button key={cat} onClick={() => handleNav(cat)} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.9rem 1.5rem', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'Jost', fontWeight: 300, fontSize: '0.82rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: activeCategory === cat ? '#1A3A5C' : '#5A7FA0', borderBottom: '1px solid #EEF3F8' }}>
               {cat}
