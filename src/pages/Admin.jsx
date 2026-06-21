@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const EMPTY_FORM = { name: '', description: '', price: '', stock: '', category: '', subcategory: '', is_new: false, featured: false }
-const CATEGORIES = ['aros', 'collares', 'accesorios']
+const CATEGORIES = ['aros', 'collares', 'pulseras', 'accesorios', 'de fiesta']
 const AROS_SUB = ['todos los días', 'fiesta']
 
 export default function Admin() {
