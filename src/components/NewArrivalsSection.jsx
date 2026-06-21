@@ -6,7 +6,8 @@ const PAGE_SIZE = 12
 export default function NewArrivalsSection({ products }) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
   // mezcla las categorías disponibles tomando los más recientes de cada una
-  const byCategory = products.reduce((acc, p) => {
+  const newProducts = products.filter(p => p.is_new)
+  const byCategory = newProducts.reduce((acc, p) => {
     const cat = p.category || 'otros'
     if (!acc[cat]) acc[cat] = []
     acc[cat].push(p)
@@ -15,7 +16,7 @@ export default function NewArrivalsSection({ products }) {
   const categories = Object.keys(byCategory)
   const mixed = []
   let i = 0
-  while (mixed.length < products.length) {
+  while (mixed.length < newProducts.length) {
     let added = false
     for (const cat of categories) {
       if (byCategory[cat][i]) { mixed.push(byCategory[cat][i]); added = true }
