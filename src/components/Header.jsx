@@ -1,7 +1,7 @@
 import { useCart } from '../App'
 import { useState } from 'react'
 
-const NAV = ['lo nuevo', 'aros', 'collares', 'accesorios']
+const NAV = ['lo nuevo', 'aros', 'collares', 'pulseras', 'accesorios']
 
 export default function Header({ activeCategory, onCategory }) {
   const { totalItems, setCartOpen } = useCart()

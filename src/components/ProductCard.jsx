@@ -7,7 +7,6 @@ export default function ProductCard({ product, showNewBadge = false }) {
 
   const stock = product.stock ?? null
   const sinStock = stock !== null && stock === 0
-  const pocaStock = stock !== null && stock > 0 && stock <= 3
 
   return (
     <>
@@ -53,10 +52,6 @@ export default function ProductCard({ product, showNewBadge = false }) {
           </h3>
           <p className="text-carao text-sm font-jost font-light">
             ${Number(product.price).toLocaleString('es-AR')}
-          </p>
-          {/* altura fija para la línea de stock — evita desalineación entre cards */}
-          <p style={{ fontFamily: 'Jost', fontSize: '0.7rem', color: '#C08B3A', fontWeight: 300, letterSpacing: '0.05em', minHeight: '1rem' }}>
-            {pocaStock ? (stock === 1 ? 'última unidad' : `últimas ${stock} unidades`) : ''}
           </p>
           <button
             onClick={() => !sinStock && addToCart(product)}

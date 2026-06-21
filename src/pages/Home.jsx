@@ -8,6 +8,27 @@ import FilterPills from '../components/FilterPills'
 import ProductGrid from '../components/ProductGrid'
 import CartDrawer from '../components/CartDrawer'
 
+function mixByCategory(products) {
+  const byCategory = products.reduce((acc, p) => {
+    const cat = p.category || 'otros'
+    if (!acc[cat]) acc[cat] = []
+    acc[cat].push(p)
+    return acc
+  }, {})
+  const cats = Object.keys(byCategory)
+  const mixed = []
+  let i = 0
+  while (mixed.length < products.length) {
+    let added = false
+    for (const cat of cats) {
+      if (byCategory[cat][i]) { mixed.push(byCategory[cat][i]); added = true }
+    }
+    if (!added) break
+    i++
+  }
+  return mixed
+}
+
 export default function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -40,8 +61,11 @@ export default function Home() {
     return p.category === activeCategory
   })
 
-  const visible = filtered.slice(0, visibleCount)
-  const hasMore = filtered.length > visibleCount
+  // en "todas" intercalar por categoría para que no salgan todos los aros juntos
+  const displayed = activeCategory === 'todas' ? mixByCategory(filtered) : filtered
+
+  const visible = displayed.slice(0, visibleCount)
+  const hasMore = displayed.length > visibleCount
 
   return (
     <div className="min-h-screen bg-papel">
