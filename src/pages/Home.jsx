@@ -12,6 +12,12 @@ export default function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState('todas')
+  const [visibleCount, setVisibleCount] = useState(10)
+
+  function handleCategory(cat) {
+    setActiveCategory(cat)
+    setVisibleCount(10)
+  }
 
   useEffect(() => {
     async function fetchProducts() {
@@ -34,10 +40,13 @@ export default function Home() {
     return p.category === activeCategory
   })
 
+  const visible = filtered.slice(0, visibleCount)
+  const hasMore = filtered.length > visibleCount
+
   return (
     <div className="min-h-screen bg-papel">
       <Banner />
-      <Header activeCategory={activeCategory} onCategory={setActiveCategory} />
+      <Header activeCategory={activeCategory} onCategory={handleCategory} />
       <Hero featuredProduct={featuredProduct} />
 
       <section id="novedades">
@@ -57,12 +66,34 @@ export default function Home() {
             <img src="/flor_azul.svg" alt="" className="h-8 w-8 object-contain opacity-50" />
           </div>
 
-          <FilterPills active={activeCategory} onChange={setActiveCategory} />
+          <FilterPills active={activeCategory} onChange={handleCategory} />
 
           {loading ? (
             <div className="text-center py-20 text-carao font-jost font-light">cargando...</div>
           ) : (
-            <ProductGrid products={filtered} />
+            <>
+              <ProductGrid products={visible} />
+              {hasMore && (
+                <div className="text-center mt-12">
+                  <button
+                    onClick={() => setVisibleCount(v => v + 10)}
+                    style={{
+                      border: '1px solid #1A3A5C',
+                      color: '#1A3A5C',
+                      padding: '0.65rem 2.5rem',
+                      fontFamily: 'Jost',
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                      background: 'transparent',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    ver más
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

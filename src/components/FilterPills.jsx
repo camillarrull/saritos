@@ -1,4 +1,4 @@
-const CATEGORIES = ['todas', 'lo nuevo', 'aros', 'collares', 'accesorios']
+const CATEGORIES = ['todas', 'lo nuevo', 'aros', 'collares', 'accesorios', 'de fiesta']
 
 export default function FilterPills({ active, onChange }) {
   return (
