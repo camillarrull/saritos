@@ -12,7 +12,7 @@ export default function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState('todas')
-  const [visibleCount, setVisibleCount] = useState(10)
+  const [visibleCount, setVisibleCount] = useState(12)
 
   function handleCategory(cat) {
     setActiveCategory(cat)
@@ -76,7 +76,7 @@ export default function Home() {
               {hasMore && (
                 <div className="text-center mt-12">
                   <button
-                    onClick={() => setVisibleCount(v => v + 10)}
+                    onClick={() => setVisibleCount(v => v + 12)}
                     style={{
                       border: '1px solid #1A3A5C',
                       color: '#1A3A5C',

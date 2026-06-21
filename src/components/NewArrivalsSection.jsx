@@ -1,16 +1,33 @@
 import { useState } from 'react'
 import ProductGrid from './ProductGrid'
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = 12
 
 export default function NewArrivalsSection({ products }) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
-  const newProducts = products.filter(p => p.is_new)
+  // mezcla las categorías disponibles tomando los más recientes de cada una
+  const byCategory = products.reduce((acc, p) => {
+    const cat = p.category || 'otros'
+    if (!acc[cat]) acc[cat] = []
+    acc[cat].push(p)
+    return acc
+  }, {})
+  const categories = Object.keys(byCategory)
+  const mixed = []
+  let i = 0
+  while (mixed.length < products.length) {
+    let added = false
+    for (const cat of categories) {
+      if (byCategory[cat][i]) { mixed.push(byCategory[cat][i]); added = true }
+    }
+    if (!added) break
+    i++
+  }
 
-  if (newProducts.length === 0) return null
+  if (mixed.length === 0) return null
 
-  const visible = newProducts.slice(0, visibleCount)
-  const hasMore = newProducts.length > visibleCount
+  const visible = mixed.slice(0, visibleCount)
+  const hasMore = mixed.length > visibleCount
 
   return (
     <section className="bg-papel py-20 px-6">

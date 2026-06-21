@@ -48,7 +48,7 @@ export default function ProductCard({ product, showNewBadge = false }) {
         </div>
 
         <div className="pt-3 flex flex-col gap-1">
-          <h3 className="text-cacao text-sm tracking-wide font-jost font-light leading-tight">
+          <h3 className="text-cacao text-sm tracking-wide font-jost font-light leading-tight truncate">
             {product.name}
           </h3>
           <p className="text-carao text-sm font-jost font-light">
