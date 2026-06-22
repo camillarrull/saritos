@@ -3,11 +3,16 @@ import { useCart } from '../App'
 export default function CartDrawer() {
   const { cartItems, cartOpen, setCartOpen, removeFromCart, updateQty } = useCart()
 
-  const total = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0)
+  const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0)
+  const totalUnits = cartItems.reduce((sum, i) => sum + i.qty, 0)
+  const hasDiscount = totalUnits >= 3
+  const discount = hasDiscount ? Math.round(subtotal * 0.1) : 0
+  const total = subtotal - discount
 
   function buildWhatsappMessage() {
     const lines = cartItems.map(i => `${i.name} x${i.qty} — $${Number(i.price * i.qty).toLocaleString('es-AR')}`)
-    const msg = `Hola! Quiero hacer el siguiente pedido de SARITOS:\n\n${lines.join('\n')}\n\nTotal: $${Number(total).toLocaleString('es-AR')}\n\n¿Me podés pasar el alias para hacer el pago? ¡Gracias!`
+    const discountLine = hasDiscount ? `\nDescuento 10% (3+ productos): -$${Number(discount).toLocaleString('es-AR')}` : ''
+    const msg = `Hola! Quiero hacer el siguiente pedido de SARITOS:\n\n${lines.join('\n')}${discountLine}\n\nTotal: $${Number(total).toLocaleString('es-AR')}\n\n¿Me podés pasar el alias para hacer el pago? ¡Gracias!`
     const number = import.meta.env.VITE_WHATSAPP_NUMBER
     return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`
   }
@@ -89,6 +94,22 @@ export default function CartDrawer() {
         {/* footer */}
         {cartItems.length > 0 && (
           <div style={{ padding: '1.2rem 1.5rem', borderTop: '1px solid #A0BFDA' }}>
+            {hasDiscount && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.4rem' }}>
+                <span style={{ fontFamily: 'Jost', fontWeight: 300, fontSize: '0.75rem', color: '#5A7FA0', letterSpacing: '0.08em' }}>subtotal</span>
+                <span style={{ fontFamily: 'Jost', fontWeight: 300, fontSize: '0.9rem', color: '#5A7FA0', textDecoration: 'line-through' }}>
+                  ${Number(subtotal).toLocaleString('es-AR')}
+                </span>
+              </div>
+            )}
+            {hasDiscount && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.4rem' }}>
+                <span style={{ fontFamily: 'Jost', fontWeight: 300, fontSize: '0.75rem', color: '#C08B3A', letterSpacing: '0.08em' }}>descuento 10% ✦</span>
+                <span style={{ fontFamily: 'Jost', fontWeight: 300, fontSize: '0.9rem', color: '#C08B3A' }}>
+                  −${Number(discount).toLocaleString('es-AR')}
+                </span>
+              </div>
+            )}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '1rem' }}>
               <span style={{ fontFamily: 'Jost', fontWeight: 300, fontSize: '0.82rem', color: '#5A7FA0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Total</span>
               <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.6rem', color: '#1A3A5C', fontWeight: 400 }}>
