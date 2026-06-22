@@ -58,6 +58,7 @@ export default function Home() {
   const filtered = products.filter(p => {
     if (activeCategory === 'todas') return true
     if (activeCategory === 'lo nuevo') return p.is_new
+    if (activeCategory === 'de fiesta') return p.subcategory === 'fiesta'
     return p.category === activeCategory
   })
 

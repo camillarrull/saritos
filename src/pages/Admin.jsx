@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const EMPTY_FORM = { name: '', description: '', price: '', stock: '', category: '', subcategory: '', is_new: false, featured: false }
-const CATEGORIES = ['aros', 'collares', 'pulseras', 'accesorios', 'de fiesta']
-const AROS_SUB = ['todos los días', 'fiesta']
+const CATEGORIES = ['aros', 'collares', 'pulseras', 'accesorios']
 
 export default function Admin() {
   const [authed, setAuthed] = useState(sessionStorage.getItem('saritos_admin') === 'true')
@@ -165,12 +164,10 @@ export default function Admin() {
               <option value="">Sin categoría</option>
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
-            {form.category === 'aros' && (
-              <select value={form.subcategory} onChange={e => setForm({ ...form, subcategory: e.target.value })} className="border border-gray-200 px-3 py-2 rounded text-sm text-gray-500">
-                <option value="">Subcategoría de aros</option>
-                {AROS_SUB.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
-            )}
+            <div className="flex items-center gap-2">
+              <input type="checkbox" id="is_fiesta" checked={form.subcategory === 'fiesta'} onChange={e => setForm({ ...form, subcategory: e.target.checked ? 'fiesta' : '' })} />
+              <label htmlFor="is_fiesta" className="text-sm">De fiesta</label>
+            </div>
             <input placeholder="Descripción" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} className="border border-gray-200 px-3 py-2 rounded text-sm" />
             <div className="flex flex-col gap-1">
               <label className="text-xs text-gray-500">Foto del producto</label>
