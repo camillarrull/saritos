@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import Contenido from '../admin/contenido/Contenido'
 
 const EMPTY_FORM = { name: '', description: '', price: '', stock: '', category: '', subcategory: '', is_new: false, featured: false }
 const CATEGORIES = ['aros', 'collares', 'pulseras', 'accesorios']
@@ -13,6 +14,12 @@ export default function Admin() {
   const [imageFile, setImageFile] = useState(null)
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState('')
+  const [seccion, setSeccion] = useState(sessionStorage.getItem('saritos_admin_seccion') || 'productos')
+
+  function irA(s) {
+    sessionStorage.setItem('saritos_admin_seccion', s)
+    setSeccion(s)
+  }
 
   function login() {
     if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
@@ -146,13 +153,37 @@ export default function Admin() {
     )
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-semibold" style={{ fontFamily: 'Cormorant Garamond, serif' }}>Admin — SARITOS</h1>
-          <a href="/" className="text-sm text-blue-600 underline">← ver tienda</a>
+  const nav = (
+    <div className="bg-cacao text-papel">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4 flex-wrap">
+        <span className="text-lg" style={{ fontFamily: 'Cormorant Garamond, serif' }}>Admin — SARITOS</span>
+        <div className="flex gap-2">
+          {[['productos', 'Productos'], ['contenido', 'Contenido']].map(([k, t]) => (
+            <button key={k} type="button" onClick={() => irA(k)}
+              className={`px-4 py-1.5 rounded-full text-sm ${seccion === k ? 'bg-papel text-cacao font-medium' : 'text-papel/80 hover:text-papel'}`}>
+              {t}
+            </button>
+          ))}
         </div>
+        <a href="/" className="text-sm text-papel/80 underline">ver tienda</a>
+      </div>
+    </div>
+  )
+
+  if (seccion === 'contenido') {
+    return (
+      <div className="min-h-screen bg-papel">
+        {nav}
+        <Contenido supabase={supabase} />
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {nav}
+    <div className="p-6">
+      <div className="max-w-4xl mx-auto">
 
         <div className="bg-white rounded shadow p-6 mb-8">
           <h2 className="text-lg font-semibold mb-4">{editingId ? 'Editar producto' : 'Agregar producto'}</h2>
@@ -229,6 +260,7 @@ export default function Admin() {
           )}
         </div>
       </div>
+    </div>
     </div>
   )
 }
