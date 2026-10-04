@@ -153,7 +153,6 @@ function Post({ p, st, today, onStage, onWho, flash }) {
             <div><h4>Qué cuenta</h4><p>{p.dv}</p></div>
             <div><h4>Copy</h4><div className="copybox">{p.cp}</div></div>
             <div><h4>Llamado a la acción</h4><p>{p.cta}</p></div>
-            <div><h4>Carpeta en Drive</h4><p><code>{p.carpeta}</code></p></div>
             <div><CopyButton text={p.cp} /></div>
           </div>
         </details>
@@ -202,7 +201,7 @@ function CalendarView({ est, setEst, today }) {
       <div className="flow" aria-label="Etapas de cada publicación">
         <div><small>1</small><b>Material</b><span>Fotos y videos sacados en la sesión</span></div>
         <div><small>2</small><b>Editado</b><span>Color parejo, recortes 4:5 y 9:16</span></div>
-        <div><small>3</small><b>Listo para subir</b><span>Carrusel o reel armado + copy en su carpeta</span></div>
+        <div><small>3</small><b>Listo para subir</b><span>Imágenes y texto cargados en esta página</span></div>
         <div><small>4</small><b>Programado</b><span>Cargado en Meta Business Suite</span></div>
         <div><small>5</small><b>Publicado</b><span>Salió, y se hacen las historias</span></div>
         <div><small>+</small><b>Cualquiera</b><span>Cada paso lo puede tomar cualquiera del equipo</span></div>
@@ -325,7 +324,7 @@ export default function Contenido({ supabase }) {
         <header className="top">
           <span className="eyebrow">Saritos · Instagram · 5 oct 2026 → 3 ene 2027</span>
           <h1>Calendario <em>Saritos</em></h1>
-          <p className="lede">45 publicaciones en 13 semanas para atraer clientas nuevas, generar confianza para comprar por WhatsApp y vender en Día de la Madre, Black Friday y Navidad. Cada pieza dice qué fotos hacen falta, en qué sesión se sacan, para cuándo tiene que estar lista y en qué carpeta va.</p>
+          <p className="lede">45 publicaciones en 13 semanas para atraer clientas nuevas, generar confianza para comprar por WhatsApp y vender en Día de la Madre, Black Friday y Navidad. Cada pieza dice qué fotos hacen falta, en qué sesión se sacan, y para cuándo tiene que estar lista. Las que ya están listas se descargan desde acá.</p>
           <div className="statusline">
             <span className={`sync${status.ok ? " on" : ""}`}><i />{status.msg}</span>
             <span>{listas} de {ALL.length} listas · {publicadas} publicadas</span>

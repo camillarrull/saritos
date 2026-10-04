@@ -12,7 +12,7 @@ export const ETAPAS=["Por hacer","Material","Editado","Listo para subir","Progra
 export const PERSONAS=["Camila","Emi"];
 
 export const SES={
- S0:{n:"Preparación sin productos",f:"2026-10-04",r:"25 sep – 4 oct",txt:"Todo lo que se puede diseñar antes de tener los productos: plantillas, piezas solo gráficas, destacados y accesos.",prep:["Plantillas de Canva: carrusel 4:5, portada de reel 9:16 e historia 9:16, con Cormorant Garamond y Jost y la paleta papel, arena y cacao","Accesos: Emi y Camila con acceso a Instagram en Meta Business Suite, a la carpeta de Drive y al equipo de Canva"],extra:[]},
+ S0:{n:"Preparación sin productos",f:"2026-10-04",r:"25 sep – 4 oct",txt:"Todo lo que se puede diseñar antes de tener los productos: plantillas, piezas solo gráficas, destacados y accesos.",prep:["Plantillas de Canva: carrusel 4:5, portada de reel 9:16 e historia 9:16, con Cormorant Garamond y Jost y la paleta papel, arena y cacao","Accesos: Emi y Camila con acceso a Instagram en Meta Business Suite, al admin de la web y al equipo de Canva"],extra:[]},
  S1:{n:"Primavera + Día de la Madre",f:"2026-10-05",r:"Lunes 5 de octubre",txt:"La sesión más importante: sale el material de todo octubre. Edición lista el martes 6.",prep:["Productos nuevos limpios y ordenados por pieza","Cajitas, papel de seda, cinta y tarjetas ya comprados","Fondo papel o lino, flores secas, una remera blanca y un top liso","Luz natural de ventana lateral, entre las 10 y las 12, o un día nublado","Celular limpio, video en 4K vertical"],
   extra:["Cada pieza también en 9:16 para historias","Retrato tuyo trabajando en la mesa (banco de fotos)","Clips de manos armando y revisando pares (banco para reels)"]},
  S2:{n:"Combos Verano + estilo",f:"2026-10-26",r:"Lunes 26 de octubre",txt:"Combos Verano, looks puestos y planos cálidos para el reel de Navidad. Edición lista el martes 27.",prep:["Combos armados: bolso, manta, malla y aros","Lugar con pasto o pileta y sol de tarde","El mismo par de aros para los 3 looks","Papel de regalo, cinta y una lámpara cálida para los planos de envolver"],extra:["Cada combo en 9:16 para historias","Clips cortos de detalle de cada textura"]},
@@ -186,7 +186,7 @@ export const WEEKS=[
   dv:"Formato “mostrame qué regalar con $X”.",
   cp:"Amigo invisible resuelto 🎁\nRegalos lindos, distintos y listos para regalar, dentro de tu presupuesto.\n\nEscribinos NAVIDAD por WhatsApp.",cta:"Palabra clave NAVIDAD · mandar al grupo"},
  {id:"j2",f:"2026-12-10",fm:"Reel",pl:"comunidad",o:"Confianza",ses:"DIA",tipo:"Fotos de clientas",t:"Así los usan las sarilovers",h:"Ellas los eligieron. Mirá cómo los usan.",
-  tomas:["Fotos de clientas con permiso, juntadas desde octubre en la carpeta CLIENTAS"],arm:"CapCut, 1 s por foto.",
+  tomas:["Fotos de clientas con permiso, juntadas desde octubre"],arm:"CapCut, 1 s por foto.",
   dv:"Compilado en distintos contextos.",
   cp:"Nada nos gusta más que verlos puestos 🤍\nGracias a todas las que nos mandan sus fotos.\n\n¿Querés aparecer en el próximo? Etiquetanos.",cta:"Etiquetar a Saritos"},
  {id:"j3",f:"2026-12-12",fm:"Carrusel",pl:"marca",o:"Confianza",ses:"S4",tipo:"Foto + diseño",t:"5 razones para regalar Saritos",h:"Por qué un Saritos es el regalo que se recuerda.",
@@ -257,7 +257,7 @@ export const WEEKS=[
 ];
 
 export const TASKS=[
- ["t1","2026-09-30","Crear la carpeta compartida en Drive","Con la estructura de “Cómo trabajamos”, compartida con Emi como editora."],
+ ["t1","2026-09-30","Definir dónde se guardan las fotos","Quedan en la compu de Camila (Escritorio → SARITOS). Lo que está listo para subir se descarga desde esta página."],
  ["t2","2026-09-30","Dar accesos a Emi","Instagram en Meta Business Suite, Canva (equipo o carpeta compartida) y WhatsApp Business vinculado en su compu."],
  ["t3","2026-10-01","Escribir las políticas de envío, retiro y cambios","Tiempos y costo de envío, zona y horario de retiro, cambios. Se usan en “Cómo comprar” y en preguntas frecuentes."],
  ["t4","2026-10-02","Comprar cajitas, papel de seda y tarjetas","Tienen que estar para la sesión del 5: el packaging es el diferencial de Día de la Madre."],
@@ -282,35 +282,26 @@ const h=(s)=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 // Contenido fijo de las pestañas "Cómo trabajamos" y "Estrategia"
 export const HOW_HTML=`
 <div class="sec"><span class="eyebrow">La regla</span><h2>Ninguna publicación depende de una sola persona</h2>
-<p>Todo lo que se sube vive en una carpeta compartida y en esta página. Cada publicación dice qué tomas hacen falta, cómo se arma, el copy y en qué carpeta va. Cualquiera de las dos puede tomar cualquier paso: toca su nombre en la publicación y la otra ve que está tomado. Lo que llega a “Listo para subir” se programa en Meta Business Suite con dos días de anticipación, así si una se enferma o viaja, igual sale.</p></div>
+<p>Cada publicación de esta página dice qué tomas hacen falta, cómo se arma y qué texto lleva. Cuando una publicación está lista, sus imágenes y su texto se descargan desde acá mismo, en el Calendario. Cualquiera de las dos puede tomar cualquier paso: toca su nombre en la publicación y la otra ve que está tomado. Lo que llega a “Listo para subir” conviene programarlo en Meta Business Suite con dos días de anticipación, así si una se enferma o viaja, igual sale.</p></div>
 
 <div class="sec"><span class="eyebrow">Paso a paso</span><h2>De la foto a la publicación</h2>
 <ol class="plain">
 <li><b>Sesión de fotos.</b> Seguir la lista de la pestaña “Sesiones de fotos”. En un día sale el material de varias semanas.</li>
-<li><b>Subir el material crudo</b> el mismo día a <code>01_CRUDO/</code>, en la carpeta de la sesión.</li>
-<li><b>Editar</b> con el estilo Saritos de abajo, o pasándome las fotos a mí. Lo editado va a <code>02_EDITADO/</code>.</li>
-<li><b>Armar.</b> Carrusel en Canva con la plantilla, reel en CapCut. Se exporta a la carpeta de la publicación en <code>03_LISTO-PARA-SUBIR/</code>, con un <code>copy.txt</code> que tiene el texto de esta página. Marcar “Listo para subir”.</li>
-<li><b>Programar</b> en Meta Business Suite con fecha y hora. Marcar “Programado”.</li>
-<li><b>Publicado.</b> Ese día, quien tenga el turno comparte en historias y responde comentarios. La carpeta pasa a <code>04_PUBLICADO/</code>.</li>
+<li><b>Edición.</b> Las fotos se editan con el estilo Saritos de abajo, o se le pasan a Claude para que las edite.</li>
+<li><b>Armado.</b> Se arma el carrusel, la historia o el reel con su texto.</li>
+<li><b>Listo para subir.</b> Las imágenes y el texto aparecen en la publicación, dentro del Calendario, con el botón “Descargar todas” y “Copiar”.</li>
+<li><b>Programar</b> en Meta Business Suite con fecha y hora, y marcar “Programado”.</li>
+<li><b>Publicado.</b> Ese día, quien tenga el turno comparte en historias y responde comentarios.</li>
 </ol></div>
 
-<div class="sec"><span class="eyebrow">Carpeta compartida en Drive</span><h2>Dónde va cada cosa</h2>
-<div class="tree">SARITOS-CONTENIDO/
-├─ 00_PLANTILLAS/          links de Canva, preset de edición, logos
-├─ 01_CRUDO/
-│  ├─ S1-2026-10-05_primavera/
-│  ├─ S2-2026-10-26_verano/
-│  ├─ S3-2026-11-16_fin-de-ano/
-│  └─ S4-2026-11-21_navidad/
-├─ 02_EDITADO/             misma estructura que 01_CRUDO
-├─ 03_LISTO-PARA-SUBIR/
-│  └─ 2026-10-08_carrusel_lo-que-llego-coleccion-primav/
-│     ├─ 01.jpg  02.jpg  …  (en el orden del carrusel)
-│     ├─ portada.jpg         (solo reels)
-│     └─ copy.txt
-├─ 04_PUBLICADO/
-└─ CLIENTAS/               fotos de clientas con permiso</div>
-<p class="note">Cada publicación trae el nombre exacto de su carpeta en “Tomas, armado, guion y copy”. Hoy tus fotos están en tu compu: para que Emi pueda trabajar, el material tiene que estar en Drive.</p></div>
+<div class="sec"><span class="eyebrow">Dónde buscar</span><h2>Dónde está cada cosa</h2>
+<div class="tbl"><table><tbody>
+<tr><th>Publicaciones listas</th><td>En esta página: Calendario → la publicación → “Listo para subir”. Se descargan desde la compu o desde el celular.</td></tr>
+<tr><th>Fotos originales y editadas</th><td>En la compu de Camila: Escritorio → SARITOS → “SARITOS OCTUBRE” (originales) y “SARITOS OCTUBRE EDITADAS” (editadas, en formato feed, historias y completas).</td></tr>
+<tr><th>Carruseles e historias armados</th><td>En la compu de Camila: Escritorio → SARITOS → “CONTENIDO LISTO PARA SUBIR”, una carpeta por publicación con la fecha en el nombre.</td></tr>
+<tr><th>Fotos de producto de la tienda</th><td>En el admin, pestaña Productos.</td></tr>
+</tbody></table></div>
+<p class="note">Emi no necesita acceso a la compu de Camila: todo lo que tiene que subir a Instagram lo baja desde esta página.</p></div>
 
 <div class="sec"><span class="eyebrow">Para que todo se vea Saritos</span><h2>Estilo de fotos y edición</h2>
 <div class="tbl"><table><tbody>
@@ -323,9 +314,9 @@ export const HOW_HTML=`
 </tbody></table></div></div>
 
 <div class="sec"><span class="eyebrow">Si no hay tiempo de editar</span><h2>Pasame las fotos a mí</h2>
-<p>Después de cada sesión, subí las fotos crudas a <code>01_CRUDO/</code> y avisame en el chat, o adjuntalas directamente. Te devuelvo:</p>
-<ul class="plain"><li>Las mejores tomas elegidas para cada publicación</li><li>Recortes en 4:5 y 9:16 con color y luz parejos</li><li>Los carruseles armados con la tipografía y los colores de Saritos, numerados y listos para subir</li><li>El copy de cada uno en su <code>copy.txt</code></li></ul>
-<p class="note">Lo que no puedo hacer es publicar ni programar en Instagram: ese paso lo hace Emi o Camila en Meta Business Suite.</p></div>
+<p>Después de cada sesión, decile a Claude en el chat en qué carpeta de la compu están las fotos, o adjuntalas directamente. Te devuelve:</p>
+<ul class="plain"><li>Las mejores tomas elegidas para cada publicación</li><li>Recortes en 4:5 y 9:16 con color y luz parejos</li><li>Los carruseles armados con la tipografía y los colores de Saritos, numerados y listos para subir</li><li>El texto de cada publicación, cargado en esta página</li></ul>
+<p class="note">Lo que Claude no puede hacer es publicar ni programar en Instagram: ese paso lo hace Emi o Camila.</p></div>
 
 <div class="sec"><span class="eyebrow">Propuesta para arrancar, ajustala</span><h2>Quién hace qué</h2>
 <div class="tbl"><table><thead><tr><th>Tarea</th><th>Principal</th><th>Respaldo</th><th>Por qué</th></tr></thead><tbody>
@@ -340,8 +331,8 @@ export const HOW_HTML=`
 <div class="sec"><span class="eyebrow">Antes de marcar “Listo para subir”</span><h2>Checklist de 30 segundos</h2>
 <ol class="plain">
 <li>Archivos en el tamaño correcto y numerados en orden.</li>
-<li><code>copy.txt</code> con el texto final: precios, fechas y palabra clave completos, sin corchetes.</li>
-<li>Reels: portada elegida y audio anotado en el <code>copy.txt</code>.</li>
+<li>Texto final: precios, fechas y palabra clave completos, sin corchetes.</li>
+<li>Reels: portada elegida y audio anotado.</li>
 <li>Historias del día anotadas (están en cada semana).</li>
 <li>Horario: martes, jueves y sábado entre las 19 y las 21 como punto de partida. Después se ajusta según las estadísticas.</li>
 </ol></div>`;
