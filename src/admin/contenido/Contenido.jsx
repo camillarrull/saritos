@@ -4,6 +4,7 @@
 // en la tabla contenido_estado de Supabase, y se actualiza solo cuando otra persona cambia algo.
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { PILARES, ETAPAS, PERSONAS, SES, WEEKS, TASKS, HOW_HTML, EST_HTML } from "./contenidoData";
+import { ARCHIVOS } from "./contenidoArchivos";
 import "./contenido.css";
 
 const WD = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
@@ -82,6 +83,41 @@ function CopyButton({ text }) {
   return <button className="btn" type="button" onClick={copy}>{label}</button>;
 }
 
+
+// Imágenes y texto ya listos para subir a Instagram (se cargan en contenidoArchivos.js)
+function Archivos({ a }) {
+  const urls = a.imagenes.map((f) => `${a.carpeta}/${f}`);
+  const nombre = (i) => `saritos_${a.nombre}_${a.imagenes[i]}`;
+  const bajarTodas = async () => {
+    for (let i = 0; i < urls.length; i++) {
+      const l = document.createElement("a");
+      l.href = urls[i]; l.download = nombre(i);
+      document.body.appendChild(l); l.click(); l.remove();
+      await new Promise((r) => setTimeout(r, 400));
+    }
+  };
+  return (
+    <div className="files">
+      <h4>Listo para subir · {urls.length} {urls.length === 1 ? "imagen" : "imágenes en este orden"}</h4>
+      <div className="thumbs">
+        {urls.map((u, i) => (
+          <a key={u} href={u} download={nombre(i)} title={`Descargar imagen ${i + 1}`}>
+            <img src={u} loading="lazy" alt={`Imagen ${i + 1}`} /><span>{i + 1}</span>
+          </a>
+        ))}
+      </div>
+      <p className="hint">En la compu: “Descargar todas”. En el celular: tocá cada imagen y guardala en tus fotos.</p>
+      <div className="frow">
+        <button className="btn primary" type="button" onClick={bajarTodas}>Descargar todas</button>
+        <CopyButton text={a.copy} />
+      </div>
+      <h4>Texto para Instagram</h4>
+      <div className="copybox">{a.copy}</div>
+      {a.historias && a.historias.length > 0 && (<><h4>Historias de ese día</h4><ul>{a.historias.map((h) => <li key={h}>{h}</li>)}</ul></>)}
+    </div>
+  );
+}
+
 function Post({ p, st, today, onStage, onWho, flash }) {
   const P = PILARES[p.pl]; const ses = SES[p.ses]; const d = D(p.f);
   const late = st.e < 3 && p.listo < today;
@@ -108,6 +144,7 @@ function Post({ p, st, today, onStage, onWho, flash }) {
           })}
         </div>
         <Who value={st.q} onPick={onWho} />
+        {ARCHIVOS[p.id] && <Archivos a={ARCHIVOS[p.id]} />}
         <details>
           <summary>Tomas, armado, guion y copy</summary>
           <div className="detail">

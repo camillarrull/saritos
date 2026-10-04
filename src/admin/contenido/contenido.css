@@ -157,3 +157,15 @@
 .sc p{margin:0}
 .sc .saving{font-size:12px;color:var(--ink-2)}
 .sc .errbox{background:var(--late-soft);color:var(--late);border:1px solid var(--late);border-radius:6px;padding:10px 14px;font-size:13.5px;margin-top:10px}
+
+/* Archivos listos para subir */
+.sc .files{border:1px solid var(--carao);border-radius:6px;padding:14px 16px;display:grid;gap:10px;background:var(--accent-soft)}
+.sc .files h4{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);font-weight:600}
+.sc .files ul{margin:0;padding-left:18px;font-size:14px;display:grid;gap:3px}
+.sc .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.sc .thumbs a{position:relative;display:block;border-radius:4px;overflow:hidden;background:var(--surface);aspect-ratio:4/5}
+.sc .thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.sc .thumbs span{position:absolute;left:5px;top:5px;background:var(--accent);color:var(--on-accent);font-size:11px;font-weight:600;border-radius:999px;min-width:20px;height:20px;display:grid;place-items:center;padding:0 5px}
+.sc .files .hint{font-size:12.5px;color:var(--ink-2)}
+.sc .btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.sc .files .copybox{background:var(--surface)}
