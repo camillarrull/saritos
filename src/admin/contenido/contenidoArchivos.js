@@ -3,6 +3,8 @@
 // Las imágenes viven en public/contenido/<carpeta>/.
 export const ARCHIVOS = {
   a3: {
+    titulo: "Carrusel · Lo que llegó: colección Primavera",
+    fecha: "2026-10-08",
     nombre: "lo-que-llego",
     carpeta: "/contenido/2026-10-08_lo-que-llego",
     imagenes: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg"],
@@ -27,3 +29,21 @@ Y si estás buscando regalo para el Día de la Madre (domingo 18), te ayudamos a
     ],
   },
 };
+
+// Piezas listas que no son una publicación del calendario (historias sueltas, anuncios, etc.).
+export const SUELTOS = [
+  {
+    id: "historias-llego-lo-nuevo",
+    titulo: "Historias · Llegó lo nuevo",
+    fecha: "2026-10-05",
+    nombre: "historias",
+    carpeta: "/contenido/2026-10-05_historias-llego-lo-nuevo",
+    imagenes: ["01_historia_llego-lo-nuevo.jpg", "02_historia_collage.jpg", "03_historia_tres-fotos.jpg"],
+    videos: ["04_historia_video.mp4"],
+    copy: `Las historias no llevan texto. Al subirlas, agregar el sticker "Enlace" con saritos.com.ar justo debajo de la flechita.`,
+    historias: [
+      "Orden sugerido: primero el video (con una canción de Instagram), después el collage",
+      "La de tres fotos va última, con una caja de preguntas: “¿Cuál te llevás?”",
+    ],
+  },
+];

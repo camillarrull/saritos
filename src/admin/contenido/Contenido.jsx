@@ -4,7 +4,7 @@
 // en la tabla contenido_estado de Supabase, y se actualiza solo cuando otra persona cambia algo.
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { PILARES, ETAPAS, PERSONAS, SES, WEEKS, TASKS, HOW_HTML, EST_HTML } from "./contenidoData";
-import { ARCHIVOS } from "./contenidoArchivos";
+import { ARCHIVOS, SUELTOS } from "./contenidoArchivos";
 import "./contenido.css";
 
 const WD = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
@@ -86,35 +86,74 @@ function CopyButton({ text }) {
 
 // Imágenes y texto ya listos para subir a Instagram (se cargan en contenidoArchivos.js)
 function Archivos({ a }) {
-  const urls = a.imagenes.map((f) => `${a.carpeta}/${f}`);
-  const nombre = (i) => `saritos_${a.nombre}_${a.imagenes[i]}`;
+  const imgs = a.imagenes || [];
+  const vids = a.videos || [];
+  const urls = imgs.map((f) => `${a.carpeta}/${f}`);
+  const vurls = vids.map((f) => `${a.carpeta}/${f}`);
+  const nombre = (f) => `saritos_${a.nombre}_${f}`;
   const bajarTodas = async () => {
-    for (let i = 0; i < urls.length; i++) {
+    const todos = [...imgs.map((f, i) => [urls[i], f]), ...vids.map((f, i) => [vurls[i], f])];
+    for (const [u, f] of todos) {
       const l = document.createElement("a");
-      l.href = urls[i]; l.download = nombre(i);
+      l.href = u; l.download = nombre(f);
       document.body.appendChild(l); l.click(); l.remove();
       await new Promise((r) => setTimeout(r, 400));
     }
   };
+  const total = imgs.length + vids.length;
   return (
     <div className="files">
-      <h4>Listo para subir · {urls.length} {urls.length === 1 ? "imagen" : "imágenes en este orden"}</h4>
+      <h4>Listo para subir · {total} {total === 1 ? "archivo" : "archivos, en este orden"}</h4>
       <div className="thumbs">
         {urls.map((u, i) => (
-          <a key={u} href={u} download={nombre(i)} title={`Descargar imagen ${i + 1}`}>
+          <a key={u} href={u} download={nombre(imgs[i])} title={`Descargar imagen ${i + 1}`}>
             <img src={u} loading="lazy" alt={`Imagen ${i + 1}`} /><span>{i + 1}</span>
           </a>
         ))}
       </div>
-      <p className="hint">En la compu: “Descargar todas”. En el celular: tocá cada imagen y guardala en tus fotos.</p>
+      {vurls.map((u, i) => (
+        <div className="vid" key={u}>
+          <video src={u} controls playsInline preload="metadata" />
+          <a className="btn" href={u} download={nombre(vids[i])}>Descargar video</a>
+        </div>
+      ))}
+      <p className="hint">En la compu: “Descargar todo”. En el celular: tocá cada imagen o video y guardalo en tus fotos.</p>
       <div className="frow">
-        <button className="btn primary" type="button" onClick={bajarTodas}>Descargar todas</button>
+        <button className="btn primary" type="button" onClick={bajarTodas}>Descargar todo</button>
         <CopyButton text={a.copy} />
       </div>
       <h4>Texto para Instagram</h4>
       <div className="copybox">{a.copy}</div>
-      {a.historias && a.historias.length > 0 && (<><h4>Historias de ese día</h4><ul>{a.historias.map((h) => <li key={h}>{h}</li>)}</ul></>)}
+      {a.historias && a.historias.length > 0 && (<><h4>{a.videos ? "Cómo subirlas" : "Historias de ese día"}</h4><ul>{a.historias.map((h) => <li key={h}>{h}</li>)}</ul></>)}
     </div>
+  );
+}
+
+// Pestaña "Para subir": todo lo que ya está listo, en un solo lugar
+function ParaSubirView({ est, setEst }) {
+  const packs = [
+    ...Object.entries(ARCHIVOS).map(([id, a]) => ({ ...a, postId: id })),
+    ...SUELTOS,
+  ].sort((x, y) => (x.fecha < y.fecha ? -1 : 1));
+  return (
+    <section>
+      <p className="note" style={{ marginBottom: 18 }}>Acá está todo lo que ya se puede subir a Instagram, ordenado por fecha. Descargás las imágenes, copiás el texto y lo publicás. Cuando lo subas, marcalo como publicado para que la otra lo vea.</p>
+      {packs.length === 0 && <p className="empty">Todavía no hay nada listo.</p>}
+      {packs.map((a) => {
+        const s = a.postId ? est(a.postId) : est("suelto-" + a.id);
+        const key = a.postId || "suelto-" + a.id;
+        const publicado = s.e >= 5;
+        return (
+          <article className="pack" key={key}>
+            <div className="packhead">
+              <div><span className="eyebrow">{fmt(a.fecha)}</span><h2>{a.titulo}</h2></div>
+              <button type="button" className={`step${publicado ? " on" : ""}`} aria-pressed={publicado} onClick={() => setEst(key, { e: publicado ? 3 : 5 })}>{publicado ? "✓ Publicado" : "Marcar como publicado"}</button>
+            </div>
+            <Archivos a={a} />
+          </article>
+        );
+      })}
+    </section>
   );
 }
 
@@ -307,11 +346,11 @@ function PrepView({ rows, save, today }) {
 }
 
 /* ---------- módulo ---------- */
-const TABS = [["cal", "Calendario"], ["ses", "Sesiones de fotos"], ["how", "Cómo trabajamos"], ["prep", "Preparativos"], ["est", "Estrategia"]];
+const TABS = [["subir", "Para subir"], ["cal", "Calendario"], ["ses", "Sesiones de fotos"], ["how", "Cómo trabajamos"], ["prep", "Preparativos"], ["est", "Estrategia"]];
 
 export default function Contenido({ supabase }) {
   const { rows, status, save } = useSharedState(supabase);
-  const [tab, setTab] = useState("cal");
+  const [tab, setTab] = useState("subir");
   const today = useMemo(todayCordoba, []);
   const est = (id) => rows["post:" + id] || { e: 0, q: "" };
   const setEst = (id, patch) => save("post:" + id, { e: 0, q: "", ...est(id), ...patch });
@@ -334,6 +373,7 @@ export default function Contenido({ supabase }) {
         <nav className="tabs" role="tablist">
           {TABS.map(([k, n]) => <button key={k} role="tab" type="button" aria-selected={tab === k} onClick={() => setTab(k)}>{n}</button>)}
         </nav>
+        {tab === "subir" && <ParaSubirView est={est} setEst={setEst} />}
         {tab === "cal" && <CalendarView est={est} setEst={setEst} today={today} />}
         {tab === "ses" && <SessionsView rows={rows} save={save} />}
         {tab === "how" && <section dangerouslySetInnerHTML={{ __html: HOW_HTML }} />}
