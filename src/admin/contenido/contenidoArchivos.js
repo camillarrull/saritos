@@ -38,11 +38,11 @@ export const SUELTOS = [
     fecha: "2026-10-05",
     nombre: "historias",
     carpeta: "/contenido/2026-10-05_historias-llego-lo-nuevo",
-    imagenes: ["01_historia_llego-lo-nuevo.jpg", "02_historia_collage.jpg", "03_historia_tres-fotos.jpg"],
+    imagenes: ["01_historia_llego-lo-nuevo.jpg", "02_historia_collage.jpg", "03_historia_tres-fotos.jpg", "05_historia_collage-aros.jpg", "06_historia_collage-collares.jpg"],
     videos: ["04_historia_video.mp4"],
     copy: `Las historias no llevan texto. Al subirlas, agregar el sticker "Enlace" con saritos.com.ar justo debajo de la flechita.`,
     historias: [
-      "Orden sugerido: primero el video (con una canción de Instagram), después el collage",
+      "Orden sugerido: primero el video (con una canción de Instagram), después los collages de aros y de collares",
       "La de tres fotos va última, con una caja de preguntas: “¿Cuál te llevás?”",
     ],
   },
