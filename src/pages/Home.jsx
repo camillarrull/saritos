@@ -63,7 +63,9 @@ export default function Home() {
   })
 
   // en "todas" intercalar por categoría para que no salgan todos los aros juntos
-  const displayed = activeCategory === 'todas' ? mixByCategory(filtered) : filtered
+  const ordered = activeCategory === 'todas' ? mixByCategory(filtered) : filtered
+  // los que no tienen stock se muestran al final
+  const displayed = [...ordered.filter(p => p.stock !== 0), ...ordered.filter(p => p.stock === 0)]
 
   const visible = displayed.slice(0, visibleCount)
   const hasMore = displayed.length > visibleCount

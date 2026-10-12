@@ -21,7 +21,6 @@ export default function ProductCard({ product, showNewBadge = false }) {
               src={product.image_url}
               alt={product.name}
               className="w-full h-full object-cover"
-              style={{ opacity: sinStock ? 0.5 : 1 }}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -37,12 +36,17 @@ export default function ProductCard({ product, showNewBadge = false }) {
             </span>
           )}
           {sinStock && (
-            <span
-              className="absolute top-2 left-2 px-2 py-0.5 text-xs tracking-widest uppercase font-jost"
-              style={{ backgroundColor: '#F5F7FA', color: '#5A7FA0', border: '1px solid #A0BFDA' }}
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ backgroundColor: 'rgba(248, 246, 243, 0.62)', backdropFilter: 'grayscale(60%)', WebkitBackdropFilter: 'grayscale(60%)' }}
             >
-              sin stock
-            </span>
+              <span
+                className="px-4 py-1.5 font-jost text-xs tracking-[0.25em] uppercase"
+                style={{ backgroundColor: 'rgba(248, 246, 243, 0.9)', color: '#1A3A5C', border: '1px solid #1A3A5C' }}
+              >
+                sin stock
+              </span>
+            </div>
           )}
         </div>
 

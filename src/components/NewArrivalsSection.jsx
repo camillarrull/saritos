@@ -27,7 +27,10 @@ export default function NewArrivalsSection({ products }) {
 
   if (mixed.length === 0) return null
 
-  const visible = mixed.slice(0, visibleCount)
+  // los que no tienen stock se muestran al final
+  const sorted = [...mixed.filter(p => p.stock !== 0), ...mixed.filter(p => p.stock === 0)]
+
+  const visible = sorted.slice(0, visibleCount)
   const hasMore = mixed.length > visibleCount
 
   return (

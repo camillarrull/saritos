@@ -112,6 +112,13 @@ export default function Admin() {
     fetchProducts()
   }
 
+  async function toggleSinStock(product) {
+    // sin stock = stock 0. Al volver a tener stock queda en 1 (se puede cambiar con "editar")
+    const stock = product.stock === 0 ? 1 : 0
+    await supabase.from('products').update({ stock }).eq('id', product.id)
+    fetchProducts()
+  }
+
   async function toggleNew(product) {
     await supabase.from('products').update({ is_new: !product.is_new }).eq('id', product.id)
     fetchProducts()
@@ -233,7 +240,7 @@ export default function Admin() {
           ) : (
             <div className="divide-y">
               {products.map(p => (
-                <div key={p.id} className="flex items-center gap-4 p-4">
+                <div key={p.id} className={`flex items-center gap-4 p-4 ${p.stock === 0 ? 'bg-gray-50' : ''}`}>
                   <div className="w-12 h-12 bg-gray-100 flex-shrink-0 overflow-hidden rounded">
                     {p.image_url ? <img src={p.image_url} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full" />}
                   </div>
@@ -244,6 +251,9 @@ export default function Admin() {
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <button onClick={() => toggleActive(p)} className={`text-xs px-2 py-1 rounded ${p.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-400'}`}>
                       {p.active ? 'activo' : 'oculto'}
+                    </button>
+                    <button onClick={() => toggleSinStock(p)} className={`text-xs px-2 py-1 rounded ${p.stock === 0 ? 'bg-slate-700 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}>
+                      {p.stock === 0 ? 'sin stock' : 'marcar sin stock'}
                     </button>
                     <button onClick={() => toggleNew(p)} className={`text-xs px-2 py-1 rounded ${p.is_new ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-400'}`}>
                       {p.is_new ? 'nuevo' : 'normal'}
