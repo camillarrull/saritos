@@ -100,31 +100,24 @@ export const SUELTOS = [
   },
   {
     id: "challenge-mama-con-saritos",
-    titulo: "Challenge #MamáConSaritos (post + historias)",
+    titulo: "Mostranos a tu mamá con sus Saritos (post + historias)",
     fecha: "2026-10-16",
-    nombre: "challenge-mama",
+    nombre: "mama-con-saritos",
     carpeta: "/contenido/2026-10-16_challenge-mama-con-saritos",
     imagenes: ["01.jpg", "02.jpg", "03_historia_challenge.jpg", "04_historia_domingo.jpg", "05_historia_plantilla-para-compartir.jpg"],
-    copy: `Challenge Día de la Madre 🤍 #MamáConSaritos
+    copy: `Este domingo mostranos a tu mamá con sus Saritos 🤍
 
-Este domingo mostranos a tu mamá con sus Saritos puestos (o una foto de ustedes dos juntas).
+Sacale una foto con sus Saritos puestos (o una de ustedes dos juntas) y mandánosla por mensaje. Si preferís subirla, también vale.
 
-Cómo participar:
-1. Sacale la foto
-2. Subila a tu historia o a tu feed y etiquetanos
-3. Usá #MamáConSaritos
+Las vamos a compartir en nuestras historias hasta el miércoles 21.
 
-Las compartimos todas en nuestras historias. Tienen tiempo hasta el miércoles 21.
-
-¿Tu mamá todavía no tiene? Estás a tiempo: saritos.com.ar (link en la bio)
-
-#DiaDeLaMadre #MamáConSaritos #saritos`,
+¿Tu mamá todavía no tiene? Estás a tiempo: saritos.com.ar (link en la bio)`,
     historias: [
       "Post (01 y 02 juntas, como carrusel): viernes 16",
-      "03 Tu mamá con Saritos: viernes 16 y sábado 17. Ponerle el sticker “Agregá el tuyo” con el texto: Tu mamá con Saritos 🤍 (tapa el recuadro punteado)",
+      "03 Tu mamá con Saritos: viernes 16 y sábado 17",
       "04 ¿Ya le sacaste la foto?: domingo 18, después del saludo de Feliz día",
-      "05 Plantilla: cada vez que alguien las etiquete, compartir su historia y poner la foto encima del recuadro gris. Hasta el miércoles 21",
-      "Contestarle a cada una que participe con un mensaje (y si compró, agradecerle)",
+      "05 Plantilla: cuando alguien mande una foto, ponerla encima del recuadro gris y compartirla. Antes de subirla, preguntarle si está bien que la compartan. Hasta el miércoles 21",
+      "Agradecerle a cada una que mande foto (y si compró, también por la compra)",
     ],
   },
 ];
