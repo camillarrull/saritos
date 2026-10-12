@@ -2,6 +2,40 @@
 // La clave es el id de la publicación en contenidoData.js (ej. "a3" = carrusel del jueves 8 de octubre).
 // Las imágenes viven en public/contenido/<carpeta>/.
 export const ARCHIVOS = {
+  a4: {
+    titulo: "Carrusel · ¿Qué le regalo a mamá? Según su estilo",
+    fecha: "2026-10-13",
+    nombre: "regalos-para-mama",
+    carpeta: "/contenido/2026-10-13_regalos-para-mama",
+    imagenes: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg"],
+    copy: `¿Qué le regalás a mamá este domingo? 💐
+Armamos una guía según su estilo: la clásica, la audaz, la minimal, la romántica y la que quiere todo.
+
+Todo está en saritos.com.ar (link en la bio) y hay pocas unidades de cada pieza, así que si ya sabés cuál es, no lo dejes para el sábado.
+
+¿No sabés cuál elegir? Comentá MAMÁ y te ayudamos por DM 🤍
+
+#DiaDeLaMadre #regalosparamama #aros #collares #bijou #accesorios #saritos`,
+    historias: [
+      "Subirlo el martes 13 a la mañana",
+      "Ese día compartirlo en historias con la pregunta “¿Cuál es tu mamá?”",
+      "Responder cada comentario MAMÁ por DM con 2 o 3 opciones según lo que cuenten",
+    ],
+  },
+  b4: {
+    titulo: "Post · Feliz día a todas las mamás",
+    fecha: "2026-10-18",
+    nombre: "feliz-dia-mamas",
+    carpeta: "/contenido/2026-10-18_feliz-dia-mamas",
+    imagenes: ["01.jpg"],
+    copy: `Feliz día a todas las mamás 🤍
+A las que nos prestaban los aros, a las que nos enseñaron a combinar y a las que siempre dicen “qué lindo eso que tenés puesto”.
+
+Gracias a todas las que eligieron Saritos para regalar esta semana. Nos encanta ser parte.
+
+#DiaDeLaMadre #felizdiamama #saritos`,
+    historias: ["Subirlo el domingo 18 a la mañana, junto con la historia “Feliz día, mamás”"],
+  },
   a3: {
     titulo: "Carrusel · Lo que llegó: colección Primavera",
     fecha: "2026-10-08",
@@ -44,6 +78,24 @@ export const SUELTOS = [
     historias: [
       "Orden sugerido: primero el video (con una canción de Instagram), después los collages de aros y de collares",
       "La de tres fotos va última, con una caja de preguntas: “¿Cuál te llevás?”",
+    ],
+  },
+  {
+    id: "historias-dia-de-la-madre",
+    titulo: "Historias · Día de la Madre (lunes 12 al domingo 18)",
+    fecha: "2026-10-12",
+    nombre: "historias-mama",
+    carpeta: "/contenido/2026-10-13_historias-dia-de-la-madre",
+    imagenes: ["01_historia_regalos-para-mama.jpg", "02_historia_encuesta-estilo.jpg", "03_historia_hasta-13000.jpg", "05_historia_todavia-llegas.jpg", "06_historia_feliz-dia-domingo.jpg"],
+    videos: ["04_historia_video-para-mama.mp4"],
+    copy: `Las historias no llevan texto. En las que dicen “Tocá el link”, agregar el sticker "Enlace" con saritos.com.ar justo debajo de la flechita. En los recuadros punteados va el sticker que se indica (se tapa el recuadro con el sticker).`,
+    historias: [
+      "Lun 12 o mar 13: 01 Regalos para mamá (con link) + 04 video (con canción de Instagram)",
+      "Mar 13: 02 ¿Cómo es tu mamá? con sticker Encuesta de 4 opciones: Clásica / Audaz / Minimal / Romántica. A las que voten, mandarles por DM la pieza de ese estilo",
+      "Mié 14: 03 Hasta $13.000 (con link)",
+      "Jue 15 a sáb 17: 05 Todavía llegás, con sticker Cuenta regresiva al domingo 18 y link. Se puede repetir cada día",
+      "Entre medio: historias del momento con el celu (pedidos que salen, envolviendo regalos)",
+      "Dom 18: 06 Feliz día, mamás (sin link)",
     ],
   },
 ];
